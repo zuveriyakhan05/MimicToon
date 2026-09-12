@@ -1,0 +1,6 @@
+{
+  "name": "MimicToon",
+  "description": "Child-friendly real-time AI cartoon character mirror copying body movements, face gestures, and voice in the browser.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

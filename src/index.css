@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --paper: #fffaf2;
+    --surface: #ffffff;
+    --surface-muted: #f6efe5;
+    --ink: #2d2926;
+    --ink-muted: #706963;
+    --line: #e8ddd0;
+    --coral: #e76f51;
+    --coral-dark: #c9573d;
+    --sage: #7a9e8a;
+    --butter: #f2c66d;
+    --focus: #315c70;
+  }
+
+  html {
+    background: var(--paper);
+  }
+
+  body {
+    min-width: 320px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Nunito Sans', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+}
+
+/* Shared product surface rules. These intentionally override decorative utility
+   combinations while leaving component behavior and route markup untouched. */
+body .bg-gradient-to-b,
+body .bg-gradient-to-br,
+body .bg-gradient-to-r,
+body .bg-gradient-to-tr {
+  background-image: none !important;
+}
+
+/* Gradient utility classes are still present in a few reusable controls. Keep
+   those controls visibly actionable after the visual system removes gradients. */
+body [class*="bg-gradient"][class*="text-white"] {
+  background-color: var(--coral) !important;
+}
+
+body [class*="bg-gradient"][class*="border-amber"] {
+  background-color: var(--surface-muted) !important;
+}
+
+body [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+}
+
+body [class*="rounded-3xl"] {
+  border-radius: 18px !important;
+}
+
+body [class*="rounded-2xl"] {
+  border-radius: 14px !important;
+}
+
+body [class*="rounded-xl"] {
+  border-radius: 10px !important;
+}
+
+body [class*="shadow-2xl"],
+body [class*="shadow-xl"],
+body [class*="shadow-lg"],
+body [class*="shadow-md"],
+body [class*="shadow-sm"] {
+  box-shadow: 0 4px 16px rgba(70, 48, 34, 0.08) !important;
+}
+
+body [class*="shadow-amber"],
+body [class*="shadow-orange"],
+body [class*="shadow-rose"],
+body [class*="shadow-purple"],
+body [class*="shadow-indigo"] {
+  box-shadow: 0 4px 16px rgba(70, 48, 34, 0.08) !important;
+}
+
+body .bg-white\/95,
+body .bg-white\/90,
+body .bg-white\/80,
+body .bg-white\/70 {
+  background-color: var(--surface) !important;
+}
+
+body .bg-amber-500,
+body .bg-orange-500,
+body .bg-rose-500 {
+  background-color: var(--coral) !important;
+}
+
+body .hover\:bg-amber-600:hover,
+body .hover\:bg-orange-600:hover,
+body .hover\:bg-rose-600:hover {
+  background-color: var(--coral-dark) !important;
+}
+
+body .text-amber-500,
+body .text-amber-600,
+body .text-orange-500,
+body .text-orange-600 {
+  color: var(--coral) !important;
+}
+
+body .border-amber-200,
+body .border-amber-300,
+body .border-orange-200,
+body .border-orange-300 {
+  border-color: #efc7b8 !important;
+}
+
+body .bg-amber-50,
+body .bg-amber-100,
+body .bg-orange-50,
+body .bg-orange-100 {
+  background-color: #fff1e9 !important;
+}
+
+body .text-slate-900,
+body .text-slate-800 {
+  color: var(--ink) !important;
+}
+
+body .text-slate-500,
+body .text-slate-600 {
+  color: var(--ink-muted) !important;
+}
+
+@media (max-width: 768px) {
+  body .text-6xl,
+  body .text-5xl,
+  body .text-4xl {
+    letter-spacing: -0.025em;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .live-experience-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .live-experience-grid > div {
+    grid-column: span 1 / span 1 !important;
+  }
+
+  .live-experience-grid > div:last-child {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom playful keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
