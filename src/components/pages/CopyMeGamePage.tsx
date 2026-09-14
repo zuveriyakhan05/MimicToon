@@ -106,31 +106,31 @@ export const CopyMeGamePage: React.FC<CopyMeGamePageProps> = React.memo(({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onNavigate('experience')}
-            className="p-3 rounded-2xl bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 transition shadow-sm flex items-center gap-2 text-xs font-black"
+            className="p-2.5 rounded-lg bg-white border border-[#E6DED3] text-[#23201D] hover:bg-[#F8F4EC] transition shadow-2xs flex items-center gap-2 text-xs font-black cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Studio</span>
           </motion.button>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-black text-[#23201D] tracking-tight flex items-center gap-2">
               <span>"Copy Me" Game Arena</span>
               <span className="text-2xl">🎮</span>
             </h1>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-xs sm:text-sm font-medium text-[#6C655E]">
               Watch {activeCharacter.name} demonstrate the move, then strike the matching pose!
             </p>
           </div>
         </div>
 
         <motion.button
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={handleViewResults}
-          className="px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 text-white font-black text-xs sm:text-sm shadow-md flex items-center gap-2 transition"
+          className="px-5 py-2.5 rounded-lg bg-[#E76F51] hover:bg-[#D85D3F] text-white font-black text-xs sm:text-sm shadow-tactile-coral flex items-center gap-2 transition cursor-pointer"
         >
           <Trophy className="w-4 h-4" />
           <span>Finish & View Results 🏆</span>
@@ -142,16 +142,16 @@ export const CopyMeGamePage: React.FC<CopyMeGamePageProps> = React.memo(({
         {/* Left Column: 3D Articulated Cartoon Avatar Stage (Demonstrator) */}
         <div className="lg:col-span-7 flex flex-col gap-3">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-black text-slate-800 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400" />
+            <span className="text-xs font-black text-[#23201D] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#E76F51]" />
               <span>{activeCharacter.name} (Demonstrator)</span>
             </span>
-            <span className="text-[11px] font-black text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
+            <span className="text-[11px] font-black text-[#C04F34] bg-[#FDF0EB] px-2.5 py-0.5 rounded-md border border-[#F7CEC3]">
               {gameDemoKinematics ? 'Demonstrating Move 🎬' : 'Observing You 👁️'}
             </span>
           </div>
 
-          <div className="w-full aspect-4/3 min-h-[380px] sm:min-h-[460px] rounded-2xl overflow-hidden border border-amber-300 shadow-lg bg-slate-900">
+          <div className="w-full aspect-4/3 min-h-[380px] sm:min-h-[460px] rounded-2xl overflow-hidden border-2 border-[#E6DED3] shadow-product-lg bg-[#1E1B18]">
             <Avatar3DStage
               character={activeCharacter}
               kinematics={gameDemoKinematics || kinematics}
@@ -172,9 +172,9 @@ export const CopyMeGamePage: React.FC<CopyMeGamePageProps> = React.memo(({
             />
           </div>
 
-          <div className="bg-white p-4 rounded-xl border border-amber-200 flex items-center justify-between text-xs font-bold text-slate-600 shadow-sm">
-            <span className="flex items-center gap-2 font-black text-amber-900">
-              <Sparkles className="w-4 h-4 text-amber-500" />
+          <div className="bg-white p-3.5 rounded-xl border border-[#E6DED3] flex items-center justify-between text-xs font-medium text-[#6C655E] shadow-product">
+            <span className="flex items-center gap-2 font-black text-[#23201D]">
+              <Sparkles className="w-4 h-4 text-[#E76F51]" />
               <span>Game Rules:</span>
             </span>
             <span>Hold the target pose steady for 2 seconds until the meter fills up! ⭐</span>
@@ -184,7 +184,7 @@ export const CopyMeGamePage: React.FC<CopyMeGamePageProps> = React.memo(({
         {/* Right Column: Webcam Vision + Real-time Scoring HUD */}
         <div className="lg:col-span-5 space-y-4">
           {/* Webcam Vision Node */}
-          <div className="relative rounded-3xl overflow-hidden border-3 border-slate-200 shadow-md bg-slate-950">
+          <div className="relative rounded-2xl overflow-hidden border-2 border-[#E6DED3] shadow-product bg-[#1E1B18]">
             <WebcamTracker
               onMotionDetected={handleMotionDetected}
               onLandmarksDetected={handleLandmarksDetected}

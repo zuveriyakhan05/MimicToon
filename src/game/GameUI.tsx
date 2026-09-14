@@ -212,19 +212,21 @@ export const GameUI: React.FC<GameUIProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-3xl border-2 border-amber-200 p-4 sm:p-5 shadow-sm space-y-4">
+    <div className="bg-white rounded-2xl border border-[#E6DED3] p-4 sm:p-5 shadow-product space-y-4">
       {/* Top Header & Stats Badges */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-100 pb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">{challenge.emoji}</span>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E6DED3] pb-3">
+        <div className="flex items-center gap-2.5">
+          <span className="w-10 h-10 rounded-xl bg-[#F8F4EC] border border-[#E6DED3] flex items-center justify-center text-xl shadow-2xs">
+            {challenge.emoji}
+          </span>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-black text-slate-800">Copy Me!</h3>
-              <span className="text-xs font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 capitalize">
+              <h3 className="text-base font-black text-[#23201D]">Copy Me!</h3>
+              <span className="text-xs font-black px-2 py-0.5 rounded-md bg-[#FDF0EB] text-[#C04F34] border border-[#F7CEC3] capitalize">
                 {difficulty}
               </span>
             </div>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-xs font-medium text-[#6C655E]">
               Watch {activeCharacter.name}, then copy the pose!
             </p>
           </div>
@@ -232,20 +234,20 @@ export const GameUI: React.FC<GameUIProps> = ({
 
         {/* Awards Counter Pills */}
         <div className="flex items-center gap-1.5 flex-wrap">
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-50 border border-amber-200 text-xs font-extrabold text-amber-900 shadow-2xs">
-            <Trophy className="w-3.5 h-3.5 text-amber-600" />
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FEF7E8] border border-[#FBE2A8] text-xs font-bold text-[#23201D] shadow-2xs">
+            <Trophy className="w-3.5 h-3.5 text-[#D49826]" />
             <span>{awards.points} pts</span>
           </div>
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-amber-100 border border-amber-300 text-xs font-black text-amber-900 shadow-2xs">
-            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FEF7E8] border border-[#FBE2A8] text-xs font-black text-[#916212] shadow-2xs">
+            <Star className="w-3.5 h-3.5 fill-[#F2C66D] text-[#D49826]" />
             <span>+{awards.stars}</span>
           </div>
-          <div className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-orange-50 border border-orange-200 text-xs font-extrabold text-orange-900 shadow-2xs">
-            <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-400" />
+          <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FDF0EB] border border-[#F7CEC3] text-xs font-bold text-[#C04F34] shadow-2xs">
+            <Flame className="w-3.5 h-3.5 text-[#E76F51] fill-[#E76F51]" />
             <span>{awards.streak} Streak</span>
           </div>
-          <div className="flex items-center gap-1 px-2 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-extrabold text-indigo-900 shadow-2xs">
-            <Zap className="w-3.5 h-3.5 text-indigo-600" />
+          <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#F8F4EC] border border-[#E6DED3] text-xs font-bold text-[#23201D] shadow-2xs">
+            <Zap className="w-3.5 h-3.5 text-[#E76F51]" />
             <span>{awards.xp} XP</span>
           </div>
         </div>
@@ -253,24 +255,24 @@ export const GameUI: React.FC<GameUIProps> = ({
 
       {/* Primary Character Prompt Banner */}
       <div
-        className={`p-4 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-4 ${
+        className={`p-4 rounded-xl border transition-all duration-300 flex items-center justify-between gap-4 ${
           phase === 'success'
-            ? 'bg-gradient-to-r from-emerald-100 to-teal-100 border-emerald-300 shadow-md ring-2 ring-emerald-400'
+            ? 'bg-[#EBF7F0] border-[#BFE3CD] shadow-product'
             : phase === 'demo'
-            ? 'bg-gradient-to-r from-amber-100 to-yellow-100 border-amber-300 shadow-sm'
+            ? 'bg-[#FEF7E8] border-[#FBE2A8] shadow-product'
             : phase === 'prompt'
-            ? 'bg-gradient-to-r from-sky-100 to-blue-100 border-blue-300 shadow-sm'
-            : 'bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-200 shadow-xs'
+            ? 'bg-[#FDF0EB] border-[#F7CEC3] shadow-product'
+            : 'bg-[#F8F4EC] border-[#E6DED3] shadow-2xs'
         }`}
       >
         <div className="flex items-center gap-3">
           <div
-            className={`w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-sm ${
+            className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl shadow-2xs ${
               phase === 'success'
-                ? 'bg-emerald-500 text-white animate-bounce'
+                ? 'bg-[#2D8A56] text-white animate-bounce'
                 : phase === 'demo'
-                ? 'bg-amber-500 text-white animate-pulse'
-                : 'bg-indigo-500 text-white'
+                ? 'bg-[#E76F51] text-white animate-pulse'
+                : 'bg-[#23201D] text-white'
             }`}
           >
             {phase === 'success' ? '🎉' : phase === 'demo' ? '👀' : challenge.emoji}
@@ -278,16 +280,16 @@ export const GameUI: React.FC<GameUIProps> = ({
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-extrabold px-2 py-0.5 rounded-full bg-white/80 text-slate-800 border border-slate-200">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-white text-[#23201D] border border-[#E6DED3]">
                 {phase === 'prompt' && 'Step 1: Character says'}
                 {phase === 'demo' && 'Step 2: Watch buddy move'}
                 {phase === 'observe' && 'Step 3: Your turn to copy!'}
                 {phase === 'success' && 'Step 4: Celebration!'}
               </span>
-              <span className="text-xs font-black text-amber-900">{challenge.name}</span>
+              <span className="text-xs font-black text-[#23201D]">{challenge.name}</span>
             </div>
 
-            <h2 className="text-base sm:text-lg font-black text-slate-900 mt-0.5">
+            <h2 className="text-sm sm:text-base font-black text-[#23201D] mt-0.5">
               {phase === 'prompt' && '“Can you copy me?”'}
               {phase === 'demo' && `“Watch me: ${challenge.name}!”`}
               {phase === 'observe' && challenge.speechInstruction}
@@ -299,18 +301,18 @@ export const GameUI: React.FC<GameUIProps> = ({
         {/* Phase Action Pill */}
         <div className="hidden sm:flex flex-col items-end">
           {phase === 'demo' && (
-            <span className="text-xs font-black text-amber-800 animate-pulse bg-white/80 px-2.5 py-1 rounded-xl border border-amber-300">
+            <span className="text-xs font-black text-[#C04F34] bg-white px-2.5 py-1 rounded-lg border border-[#F7CEC3]">
               Demonstrating... 👀
             </span>
           )}
           {phase === 'observe' && (
-            <span className="text-xs font-black text-indigo-800 bg-white/80 px-2.5 py-1 rounded-xl border border-indigo-200">
+            <span className="text-xs font-black text-[#23201D] bg-white px-2.5 py-1 rounded-lg border border-[#E6DED3]">
               Holding: {Math.round(holdProgress)}%
             </span>
           )}
           {phase === 'success' && (
-            <span className="text-xs font-black text-emerald-800 bg-white px-2.5 py-1 rounded-xl border border-emerald-300 flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="text-xs font-black text-[#226D43] bg-white px-2.5 py-1 rounded-lg border border-[#BFE3CD] flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#2D8A56]" />
               <span>Perfect! +{challenge.points}pts</span>
             </span>
           )}
@@ -320,24 +322,24 @@ export const GameUI: React.FC<GameUIProps> = ({
       {/* Real-time Pose Similarity Score Cards (0 to 100%) */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-extrabold text-slate-700 flex items-center gap-1.5">
-            <Eye className="w-4 h-4 text-indigo-600" />
+          <span className="text-xs font-black text-[#23201D] flex items-center gap-1.5">
+            <Eye className="w-3.5 h-3.5 text-[#E76F51]" />
             <span>AI Real-Time Pose Matching:</span>
           </span>
-          <span className="text-xs font-bold text-slate-500">
-            Target Match: <strong className="text-slate-800">{config.similarityThreshold}%</strong>
+          <span className="text-xs font-medium text-[#6C655E]">
+            Target Match: <strong className="text-[#23201D]">{config.similarityThreshold}%</strong>
           </span>
         </div>
 
         {/* 4 Score Breakdown Cards Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {/* Arm Position */}
-          <div className={`p-3 rounded-2xl border transition shadow-2xs ${getScoreColor(breakdown.armScore)}`}>
+          <div className={`p-2.5 rounded-xl border transition shadow-2xs ${getScoreColor(breakdown.armScore)}`}>
             <div className="flex items-center justify-between text-xs font-bold mb-1">
               <span>🦾 Arm Position</span>
               <span className="font-black text-sm">{breakdown.armScore}%</span>
             </div>
-            <div className="w-full bg-black/10 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-black/10 rounded-full h-1.5 overflow-hidden">
               <div
                 className={`h-full transition-all duration-150 rounded-full ${getProgressBarColor(breakdown.armScore)}`}
                 style={{ width: `${breakdown.armScore}%` }}
@@ -346,12 +348,12 @@ export const GameUI: React.FC<GameUIProps> = ({
           </div>
 
           {/* Body Position */}
-          <div className={`p-3 rounded-2xl border transition shadow-2xs ${getScoreColor(breakdown.bodyScore)}`}>
+          <div className={`p-2.5 rounded-xl border transition shadow-2xs ${getScoreColor(breakdown.bodyScore)}`}>
             <div className="flex items-center justify-between text-xs font-bold mb-1">
               <span>🧍 Body Position</span>
               <span className="font-black text-sm">{breakdown.bodyScore}%</span>
             </div>
-            <div className="w-full bg-black/10 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-black/10 rounded-full h-1.5 overflow-hidden">
               <div
                 className={`h-full transition-all duration-150 rounded-full ${getProgressBarColor(breakdown.bodyScore)}`}
                 style={{ width: `${breakdown.bodyScore}%` }}
@@ -360,12 +362,12 @@ export const GameUI: React.FC<GameUIProps> = ({
           </div>
 
           {/* Head Position */}
-          <div className={`p-3 rounded-2xl border transition shadow-2xs ${getScoreColor(breakdown.headScore)}`}>
+          <div className={`p-2.5 rounded-xl border transition shadow-2xs ${getScoreColor(breakdown.headScore)}`}>
             <div className="flex items-center justify-between text-xs font-bold mb-1">
               <span>🗣️ Head Position</span>
               <span className="font-black text-sm">{breakdown.headScore}%</span>
             </div>
-            <div className="w-full bg-black/10 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-black/10 rounded-full h-1.5 overflow-hidden">
               <div
                 className={`h-full transition-all duration-150 rounded-full ${getProgressBarColor(breakdown.headScore)}`}
                 style={{ width: `${breakdown.headScore}%` }}
@@ -375,20 +377,20 @@ export const GameUI: React.FC<GameUIProps> = ({
 
           {/* Overall Score */}
           <div
-            className={`p-3 rounded-2xl border-2 transition shadow-xs ${
+            className={`p-2.5 rounded-xl border transition shadow-2xs ${
               breakdown.isMatching
-                ? 'bg-emerald-100 border-emerald-400 text-emerald-950 font-black'
-                : 'bg-amber-50 border-amber-300 text-amber-950'
+                ? 'bg-[#EBF7F0] border-[#BFE3CD] text-[#194D31] font-black'
+                : 'bg-[#FAF6EE] border-[#E6DED3] text-[#23201D]'
             }`}
           >
             <div className="flex items-center justify-between text-xs font-bold mb-1">
               <span>🌟 Overall Score</span>
               <span className="font-black text-base">{breakdown.overallScore}%</span>
             </div>
-            <div className="w-full bg-black/15 rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-black/10 rounded-full h-1.5 overflow-hidden">
               <div
                 className={`h-full transition-all duration-150 rounded-full ${
-                  breakdown.isMatching ? 'bg-emerald-600' : 'bg-amber-500'
+                  breakdown.isMatching ? 'bg-[#2D8A56]' : 'bg-[#E76F51]'
                 }`}
                 style={{ width: `${breakdown.overallScore}%` }}
               />
@@ -398,24 +400,24 @@ export const GameUI: React.FC<GameUIProps> = ({
       </div>
 
       {/* Hold Duration Meter */}
-      <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 space-y-1.5">
+      <div className="bg-[#F8F4EC] p-3 rounded-xl border border-[#E6DED3] space-y-1.5">
         <div className="flex items-center justify-between text-xs">
-          <span className="font-extrabold text-slate-700 flex items-center gap-1.5">
+          <span className="font-bold text-[#6C655E] flex items-center gap-1.5">
             <span>Hold Duration Target:</span>
-            <span className="text-amber-800 font-black">{config.completionDuration}s</span>
+            <span className="text-[#23201D] font-black">{config.completionDuration}s</span>
           </span>
-          <span className="font-black text-slate-800">
+          <span className="font-black text-[#23201D]">
             {breakdown.feedbackNote}
           </span>
         </div>
 
-        <div className="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-300">
+        <div className="w-full bg-[#E6DED3] rounded-full h-2.5 overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-100 ${
               holdProgress >= 100
-                ? 'bg-emerald-500 animate-pulse'
+                ? 'bg-[#2D8A56]'
                 : holdProgress > 0
-                ? 'bg-gradient-to-r from-amber-400 to-emerald-500'
+                ? 'bg-[#E76F51]'
                 : 'bg-transparent'
             }`}
             style={{ width: `${holdProgress}%` }}
@@ -426,15 +428,15 @@ export const GameUI: React.FC<GameUIProps> = ({
       {/* Interactive Controls & Difficulty Selectors */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
         {/* Difficulty Selectors */}
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-bold">
+        <div className="flex items-center gap-1 bg-[#F4EFE6] p-1 rounded-xl border border-[#E6DED3] text-xs font-bold">
           {(['easy', 'medium', 'hard'] as DifficultyLevel[]).map((level) => (
             <button
               key={level}
               onClick={() => handleDifficultySelect(level)}
-              className={`px-3 py-1.5 rounded-xl transition capitalize ${
+              className={`px-3 py-1 rounded-lg transition capitalize cursor-pointer ${
                 difficulty === level
-                  ? 'bg-white text-amber-900 font-black shadow-xs'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white text-[#23201D] font-black shadow-xs border border-[#DFD6CA]'
+                  : 'text-[#6C655E] hover:text-[#23201D] border border-transparent'
               }`}
             >
               {level}
@@ -446,7 +448,7 @@ export const GameUI: React.FC<GameUIProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={handleReplayDemo}
-            className="px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-xs font-extrabold text-amber-900 hover:bg-amber-50 transition shadow-2xs flex items-center gap-1"
+            className="px-3 py-1.5 rounded-lg bg-white border border-[#E6DED3] text-xs font-bold text-[#23201D] hover:bg-[#F8F4EC] transition shadow-2xs flex items-center gap-1 cursor-pointer"
             title="Watch character demonstrate again"
           >
             <RotateCcw className="w-3.5 h-3.5 text-amber-600" />

@@ -164,29 +164,29 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#23201D]/50 backdrop-blur-xs">
         <motion.div
-          initial={{ scale: 0.92, opacity: 0, y: 15 }}
+          initial={{ scale: 0.95, opacity: 0, y: 12 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.92, opacity: 0, y: 15 }}
-          className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border-2 border-amber-200 overflow-hidden"
+          exit={{ scale: 0.95, opacity: 0, y: 12 }}
+          className="relative w-full max-w-lg bg-white rounded-3xl shadow-product border border-[#E6DED3] overflow-hidden"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
+          <div className="flex items-center justify-between px-6 py-4 bg-[#FAF6EE] border-b border-[#E6DED3]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 to-orange-400 flex items-center justify-center text-xl shadow-xs">
+              <div className="w-10 h-10 rounded-2xl bg-[#FDF0EB] border border-[#F7CEC3] flex items-center justify-center text-xl shadow-inner">
                 {activeChar.icon || '🐰'}
               </div>
               <div>
-                <h3 className="text-lg font-black text-slate-900">Player Profile & Sync</h3>
-                <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500">
+                <h3 className="text-lg font-black text-[#23201D] font-display">Player Profile & Sync</h3>
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#6C655E]">
                   {isCloudConnected ? (
-                    <span className="flex items-center gap-1 text-emerald-600">
+                    <span className="flex items-center gap-1 text-[#2D8A56]">
                       <Cloud className="w-3.5 h-3.5" />
                       <span>Supabase Cloud Sync</span>
                     </span>
                   ) : (
-                    <span className="flex items-center gap-1 text-amber-700">
+                    <span className="flex items-center gap-1 text-[#8C6415]">
                       <CloudOff className="w-3.5 h-3.5" />
                       <span>Local Device Storage</span>
                     </span>
@@ -197,7 +197,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-white/80 transition"
+              className="p-2 rounded-xl text-[#6C655E] hover:text-[#23201D] hover:bg-[#F4EFE6] transition"
             >
               <X className="w-5 h-5" />
             </button>
@@ -205,7 +205,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
 
           {/* Cloud Info Notice if Supabase not configured */}
           {!isCloudConnected && (
-            <div className="px-6 py-2.5 bg-amber-100/70 border-b border-amber-200 flex items-start gap-2.5 text-xs text-amber-900">
+            <div className="px-6 py-2.5 bg-[#FEF7E8] border-b border-[#FBE2A8] flex items-start gap-2.5 text-xs text-[#8C6415]">
               <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold">Offline & Local Mode: </span>
@@ -219,7 +219,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
           )}
 
           {/* Tabs */}
-          <div className="flex border-b border-slate-200 px-6 pt-2 bg-slate-50/50">
+          <div className="flex border-b border-[#E6DED3] px-6 pt-2 bg-[#FAF6EE]">
             <button
               onClick={() => {
                 setActiveTab('profile');
@@ -228,8 +228,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
               }}
               className={`pb-2.5 px-4 text-xs font-black border-b-2 transition ${
                 activeTab === 'profile'
-                  ? 'border-amber-500 text-amber-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-800'
+                  ? 'border-[#E76F51] text-[#E76F51]'
+                  : 'border-transparent text-[#6C655E] hover:text-[#23201D]'
               }`}
             >
               Player Info
@@ -245,8 +245,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                   }}
                   className={`pb-2.5 px-4 text-xs font-black border-b-2 transition ${
                     activeTab === 'signin'
-                      ? 'border-amber-500 text-amber-600'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'border-[#E76F51] text-[#E76F51]'
+                      : 'border-transparent text-[#6C655E] hover:text-[#23201D]'
                   }`}
                 >
                   Sign In
@@ -259,8 +259,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                   }}
                   className={`pb-2.5 px-4 text-xs font-black border-b-2 transition ${
                     activeTab === 'signup'
-                      ? 'border-amber-500 text-amber-600'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'border-[#E76F51] text-[#E76F51]'
+                      : 'border-transparent text-[#6C655E] hover:text-[#23201D]'
                   }`}
                 >
                   Create Account
@@ -268,7 +268,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
               </>
             ) : (
               <div className="ml-auto pb-2 flex items-center">
-                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                <span className="text-[11px] font-bold text-[#2D8A56] bg-[#EBF7F0] px-2.5 py-0.5 rounded-full border border-[#BFE3CD] flex items-center gap-1">
                   <CheckCircle2 className="w-3 h-3" /> Logged In
                 </span>
               </div>
@@ -285,8 +285,8 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
             )}
 
             {authSuccess && (
-              <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-500" />
+              <div className="p-3 rounded-2xl bg-[#EBF7F0] border border-[#BFE3CD] text-[#2D8A56] text-xs font-bold flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 shrink-0 text-[#2D8A56]" />
                 <span>{authSuccess}</span>
               </div>
             )}
@@ -295,9 +295,9 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
             {activeTab === 'profile' && (
               <div className="space-y-5">
                 {/* User Card */}
-                <div className="p-4 rounded-3xl bg-slate-50 border-2 border-slate-200 flex items-center justify-between gap-4">
+                <div className="p-4 rounded-3xl bg-[#FAF6EE] border border-[#E6DED3] flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-14 h-14 rounded-2xl bg-white border-2 border-amber-200 flex items-center justify-center text-3xl shadow-xs">
+                    <div className="w-14 h-14 rounded-2xl bg-white border border-[#E6DED3] flex items-center justify-center text-3xl shadow-xs">
                       {activeChar.icon || '🐰'}
                     </div>
                     <div>
@@ -307,20 +307,20 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                             type="text"
                             value={editUsernameVal}
                             onChange={(e) => setEditUsernameVal(e.target.value)}
-                            className="px-2 py-1 text-sm font-black border rounded-lg border-amber-300 focus:outline-hidden"
+                            className="px-2.5 py-1 text-sm font-black border rounded-xl border-[#E76F51] bg-white focus:outline-hidden"
                             autoFocus
                           />
                           <button
                             onClick={handleSaveUsername}
                             disabled={isLoading}
-                            className="px-2.5 py-1 text-xs font-black bg-amber-500 text-white rounded-lg hover:bg-amber-600"
+                            className="px-3 py-1 text-xs font-black bg-[#E76F51] text-white rounded-xl hover:bg-[#D85D3F]"
                           >
                             Save
                           </button>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <h4 className="text-base font-black text-slate-900">
+                          <h4 className="text-base font-black text-[#23201D] font-display">
                             {profile?.display_name || profile?.username || session.username}
                           </h4>
                           <button
@@ -328,39 +328,39 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                               setEditUsernameVal(profile?.username || session.username);
                               setIsEditingUsername(true);
                             }}
-                            className="text-slate-400 hover:text-slate-700"
+                            className="text-[#988F85] hover:text-[#23201D]"
                             title="Edit username"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       )}
-                      <p className="text-xs font-bold text-slate-500">
+                      <p className="text-xs font-medium text-[#6C655E]">
                         {session.isGuest ? 'Guest Player' : session.email}
                       </p>
-                      <span className="inline-block text-[10px] font-black uppercase text-amber-700 bg-amber-100 px-2 py-0.2 rounded-md mt-1">
+                      <span className="inline-block text-[10px] font-black uppercase text-[#E76F51] bg-[#FDF0EB] border border-[#F7CEC3] px-2 py-0.2 rounded-md mt-1">
                         Active Buddy: {activeChar.name}
                       </span>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <span className="text-[10px] font-black uppercase text-slate-400">Level</span>
-                    <div className="text-2xl font-black text-amber-500">{levelInfo.level}</div>
+                    <span className="text-[10px] font-black uppercase text-[#988F85]">Level</span>
+                    <div className="text-2xl font-black text-[#E76F51] font-display">{levelInfo.level}</div>
                   </div>
                 </div>
 
                 {/* Level Progress */}
-                <div className="space-y-1.5 p-4 rounded-2xl bg-amber-50/60 border border-amber-200">
-                  <div className="flex justify-between text-xs font-black text-slate-700">
+                <div className="space-y-1.5 p-4 rounded-2xl bg-white border border-[#E6DED3] shadow-product">
+                  <div className="flex justify-between text-xs font-black text-[#23201D]">
                     <span>Level {levelInfo.level} Master</span>
-                    <span>
+                    <span className="text-[#6C655E] font-medium">
                       {levelInfo.currentLevelXp} / {levelInfo.nextLevelXp} XP ({levelInfo.progressPercent}%)
                     </span>
                   </div>
-                  <div className="w-full h-3 bg-amber-200/50 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-[#F4EFE6] rounded-full overflow-hidden border border-[#E6DED3]">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-amber-400 to-orange-400"
+                      className="h-full bg-[#E76F51] rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: `${levelInfo.progressPercent}%` }}
                     />
@@ -369,20 +369,20 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
 
                 {/* Mini Stats Grid */}
                 <div className="grid grid-cols-3 gap-2.5">
-                  <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center">
+                  <div className="p-3 rounded-2xl bg-white border border-[#E6DED3] shadow-product text-center">
                     <Star className="w-4 h-4 mx-auto text-amber-500 fill-amber-400" />
-                    <div className="text-xs font-black text-slate-400 uppercase mt-1">Stars</div>
-                    <div className="text-base font-black text-slate-800">{progress.stars}</div>
+                    <div className="text-xs font-black text-[#988F85] uppercase mt-1">Stars</div>
+                    <div className="text-base font-black text-[#23201D] font-display">{progress.stars}</div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center">
-                    <Flame className="w-4 h-4 mx-auto text-orange-500 fill-orange-500" />
-                    <div className="text-xs font-black text-slate-400 uppercase mt-1">Streak</div>
-                    <div className="text-base font-black text-slate-800">{progress.streak_days}d</div>
+                  <div className="p-3 rounded-2xl bg-white border border-[#E6DED3] shadow-product text-center">
+                    <Flame className="w-4 h-4 mx-auto text-[#E76F51] fill-[#E76F51]" />
+                    <div className="text-xs font-black text-[#988F85] uppercase mt-1">Streak</div>
+                    <div className="text-base font-black text-[#23201D] font-display">{progress.streak_days}d</div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center">
-                    <Trophy className="w-4 h-4 mx-auto text-purple-500" />
-                    <div className="text-xs font-black text-slate-400 uppercase mt-1">Poses</div>
-                    <div className="text-base font-black text-slate-800">{progress.poses_completed}</div>
+                  <div className="p-3 rounded-2xl bg-white border border-[#E6DED3] shadow-product text-center">
+                    <Trophy className="w-4 h-4 mx-auto text-[#2D8A56]" />
+                    <div className="text-xs font-black text-[#988F85] uppercase mt-1">Poses</div>
+                    <div className="text-base font-black text-[#23201D] font-display">{progress.poses_completed}</div>
                   </div>
                 </div>
 
@@ -391,7 +391,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                   <button
                     onClick={handleSignOut}
                     disabled={isLoading}
-                    className="w-full py-2.5 px-4 rounded-2xl border-2 border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-black flex items-center justify-center gap-2 transition"
+                    className="w-full py-2.5 px-4 rounded-2xl border border-[#E6DED3] text-[#6C655E] hover:text-[#23201D] hover:bg-[#FAF6EE] text-xs font-black flex items-center justify-center gap-2 transition"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Sign Out to Guest Mode</span>
@@ -399,7 +399,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                 ) : (
                   <button
                     onClick={() => setActiveTab('signup')}
-                    className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white text-xs sm:text-sm font-black flex items-center justify-center gap-2 shadow-md shadow-amber-400/30 transition hover:from-amber-500 hover:to-orange-500"
+                    className="w-full py-3 px-4 rounded-2xl bg-[#E76F51] hover:bg-[#D85D3F] text-white text-xs sm:text-sm font-black flex items-center justify-center gap-2 shadow-tactile-coral transition"
                   >
                     <Cloud className="w-4 h-4" />
                     <span>Save & Sync Progress to Supabase</span>
@@ -412,7 +412,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
             {activeTab === 'signin' && (
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-black uppercase text-slate-600 mb-1">
+                  <label className="block text-xs font-black uppercase text-[#23201D] mb-1">
                     Email Address
                   </label>
                   <input
@@ -421,12 +421,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-amber-400 text-sm font-bold focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-2xl border border-[#E6DED3] focus:border-[#E76F51] text-sm font-bold bg-[#FAF6EE]/50 focus:bg-white text-[#23201D] focus:outline-hidden transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-black uppercase text-slate-600 mb-1">
+                  <label className="block text-xs font-black uppercase text-[#23201D] mb-1">
                     Password
                   </label>
                   <input
@@ -435,14 +435,14 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-amber-400 text-sm font-bold focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-2xl border border-[#E6DED3] focus:border-[#E76F51] text-sm font-bold bg-[#FAF6EE]/50 focus:bg-white text-[#23201D] focus:outline-hidden transition"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white font-black text-sm shadow-md shadow-amber-400/30 flex items-center justify-center gap-2 hover:from-amber-500 hover:to-orange-500 transition"
+                  className="w-full py-3 rounded-2xl bg-[#E76F51] hover:bg-[#D85D3F] text-white font-black text-sm shadow-tactile-coral flex items-center justify-center gap-2 transition"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>{isLoading ? 'Signing In...' : 'Sign In'}</span>
@@ -454,7 +454,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
             {activeTab === 'signup' && (
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-black uppercase text-slate-600 mb-1">
+                  <label className="block text-xs font-black uppercase text-[#23201D] mb-1">
                     Hero Name / Username
                   </label>
                   <input
@@ -463,12 +463,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="SuperBouncyFox"
-                    className="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-amber-400 text-sm font-bold focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-2xl border border-[#E6DED3] focus:border-[#E76F51] text-sm font-bold bg-[#FAF6EE]/50 focus:bg-white text-[#23201D] focus:outline-hidden transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-black uppercase text-slate-600 mb-1">
+                  <label className="block text-xs font-black uppercase text-[#23201D] mb-1">
                     Email Address
                   </label>
                   <input
@@ -477,12 +477,12 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-amber-400 text-sm font-bold focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-2xl border border-[#E6DED3] focus:border-[#E76F51] text-sm font-bold bg-[#FAF6EE]/50 focus:bg-white text-[#23201D] focus:outline-hidden transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-black uppercase text-slate-600 mb-1">
+                  <label className="block text-xs font-black uppercase text-[#23201D] mb-1">
                     Password (at least 6 characters)
                   </label>
                   <input
@@ -492,14 +492,14 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-3.5 py-2.5 rounded-2xl border-2 border-slate-200 focus:border-amber-400 text-sm font-bold focus:outline-hidden"
+                    className="w-full px-3.5 py-2.5 rounded-2xl border border-[#E6DED3] focus:border-[#E76F51] text-sm font-bold bg-[#FAF6EE]/50 focus:bg-white text-[#23201D] focus:outline-hidden transition"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white font-black text-sm shadow-md shadow-amber-400/30 flex items-center justify-center gap-2 hover:from-amber-500 hover:to-orange-500 transition"
+                  className="w-full py-3 rounded-2xl bg-[#E76F51] hover:bg-[#D85D3F] text-white font-black text-sm shadow-tactile-coral flex items-center justify-center gap-2 transition"
                 >
                   <UserPlus className="w-4 h-4" />
                   <span>{isLoading ? 'Creating Account...' : 'Create Account & Sync'}</span>

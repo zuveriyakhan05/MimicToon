@@ -2,33 +2,49 @@
 
 @layer base {
   :root {
-    --paper: #fffaf2;
-    --surface: #ffffff;
-    --surface-muted: #f6efe5;
-    --ink: #2d2926;
-    --ink-muted: #706963;
-    --line: #e8ddd0;
-    --coral: #e76f51;
-    --coral-dark: #c9573d;
-    --sage: #7a9e8a;
-    --butter: #f2c66d;
-    --focus: #315c70;
+    --paper: #FAF6EE;
+    --paper-warm: #F5EFE4;
+    --surface: #FFFFFF;
+    --surface-muted: #F8F4EC;
+    --surface-sunken: #EFE8DC;
+    --ink: #23201D;
+    --ink-muted: #6C655E;
+    --ink-subtle: #988F85;
+    --line: #E6DED3;
+    --line-strong: #D6CBC0;
+    --coral: #E76F51;
+    --coral-hover: #D85D3F;
+    --coral-dark: #C04F34;
+    --coral-subtle: #FDF0EB;
+    --coral-border: #F7CEC3;
+    --sage: #2D8A56;
+    --sage-dark: #226D43;
+    --sage-subtle: #EBF7F0;
+    --sage-border: #BFE3CD;
+    --butter: #F2C66D;
+    --butter-subtle: #FEF7E8;
+    --butter-border: #FBE2A8;
+    --focus: #E76F51;
   }
 
   html {
-    background: var(--paper);
+    background-color: var(--paper);
+    color: var(--ink);
   }
 
   body {
     min-width: 320px;
-    background: var(--paper);
+    background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, .font-display {
+  h1, h2, h3, h4, h5, h6, .font-display {
     font-family: 'Nunito Sans', sans-serif;
     letter-spacing: -0.02em;
+    font-weight: 800;
   }
 
   button,
@@ -43,118 +59,30 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 3px solid var(--focus);
-    outline-offset: 3px;
+    outline: 2.5px solid var(--focus);
+    outline-offset: 2px;
   }
 }
 
-/* Shared product surface rules. These intentionally override decorative utility
-   combinations while leaving component behavior and route markup untouched. */
-body .bg-gradient-to-b,
-body .bg-gradient-to-br,
-body .bg-gradient-to-r,
-body .bg-gradient-to-tr {
-  background-image: none !important;
+/* Custom crafted product elevation */
+.shadow-product {
+  box-shadow: 0 1px 3px rgba(35, 32, 29, 0.04), 0 4px 12px rgba(35, 32, 29, 0.06);
 }
 
-/* Gradient utility classes are still present in a few reusable controls. Keep
-   those controls visibly actionable after the visual system removes gradients. */
-body [class*="bg-gradient"][class*="text-white"] {
-  background-color: var(--coral) !important;
+.shadow-product-lg {
+  box-shadow: 0 4px 6px -1px rgba(35, 32, 29, 0.04), 0 12px 28px -4px rgba(35, 32, 29, 0.09);
 }
 
-body [class*="bg-gradient"][class*="border-amber"] {
-  background-color: var(--surface-muted) !important;
+.shadow-product-hover {
+  box-shadow: 0 6px 16px rgba(35, 32, 29, 0.08), 0 18px 36px -6px rgba(35, 32, 29, 0.12);
 }
 
-body [class*="backdrop-blur"] {
-  backdrop-filter: none !important;
+.shadow-tactile {
+  box-shadow: 0 2px 0 var(--line-strong);
 }
 
-body [class*="rounded-3xl"] {
-  border-radius: 18px !important;
-}
-
-body [class*="rounded-2xl"] {
-  border-radius: 14px !important;
-}
-
-body [class*="rounded-xl"] {
-  border-radius: 10px !important;
-}
-
-body [class*="shadow-2xl"],
-body [class*="shadow-xl"],
-body [class*="shadow-lg"],
-body [class*="shadow-md"],
-body [class*="shadow-sm"] {
-  box-shadow: 0 4px 16px rgba(70, 48, 34, 0.08) !important;
-}
-
-body [class*="shadow-amber"],
-body [class*="shadow-orange"],
-body [class*="shadow-rose"],
-body [class*="shadow-purple"],
-body [class*="shadow-indigo"] {
-  box-shadow: 0 4px 16px rgba(70, 48, 34, 0.08) !important;
-}
-
-body .bg-white\/95,
-body .bg-white\/90,
-body .bg-white\/80,
-body .bg-white\/70 {
-  background-color: var(--surface) !important;
-}
-
-body .bg-amber-500,
-body .bg-orange-500,
-body .bg-rose-500 {
-  background-color: var(--coral) !important;
-}
-
-body .hover\:bg-amber-600:hover,
-body .hover\:bg-orange-600:hover,
-body .hover\:bg-rose-600:hover {
-  background-color: var(--coral-dark) !important;
-}
-
-body .text-amber-500,
-body .text-amber-600,
-body .text-orange-500,
-body .text-orange-600 {
-  color: var(--coral) !important;
-}
-
-body .border-amber-200,
-body .border-amber-300,
-body .border-orange-200,
-body .border-orange-300 {
-  border-color: #efc7b8 !important;
-}
-
-body .bg-amber-50,
-body .bg-amber-100,
-body .bg-orange-50,
-body .bg-orange-100 {
-  background-color: #fff1e9 !important;
-}
-
-body .text-slate-900,
-body .text-slate-800 {
-  color: var(--ink) !important;
-}
-
-body .text-slate-500,
-body .text-slate-600 {
-  color: var(--ink-muted) !important;
-}
-
-@media (max-width: 768px) {
-  body .text-6xl,
-  body .text-5xl,
-  body .text-4xl {
-    letter-spacing: -0.025em;
-  }
+.shadow-tactile-coral {
+  box-shadow: 0 3px 0 var(--coral-dark);
 }
 
 @media (min-width: 769px) and (max-width: 1199px) {
@@ -182,31 +110,13 @@ body .text-slate-600 {
   }
 }
 
-/* Custom playful keyframes */
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(1deg); }
+/* Tactile keyframe accents */
+@keyframes softPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.98); }
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
-  50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-wiggle {
-  animation: wiggle 0.5s ease-in-out infinite;
-}
-
-.animate-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
+.animate-soft-pulse {
+  animation: softPulse 2.5s ease-in-out infinite;
 }
 
