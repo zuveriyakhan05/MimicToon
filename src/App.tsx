@@ -236,7 +236,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50/50 via-white to-orange-50/40 text-slate-800 antialiased selection:bg-amber-200">
+    <div className="min-h-screen flex flex-col bg-[#FAF6EE] text-[#23201D] antialiased selection:bg-[#FCE2D9] selection:text-[#B94C31]">
       {/* Primary Navigation Bar with 8 Pages Navigation and Player Profile */}
       <Navbar
         currentPage={currentPage}

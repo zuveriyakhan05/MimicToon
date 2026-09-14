@@ -119,14 +119,14 @@ export const PoseChallengeGame: React.FC<PoseChallengeGameProps> = ({
 
         {/* Score & Combo */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full text-xs font-black text-amber-900 shadow-xs">
+          <div className="flex items-center gap-1 bg-[#FEF7E8] border border-[#FBE2A8] px-3 py-1 rounded-full text-xs font-black text-amber-900 shadow-xs">
             <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
             <span>{score} pts</span>
           </div>
 
           <button
             onClick={restartGame}
-            className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition"
+            className="p-1.5 text-[#988F85] hover:text-[#23201D] hover:bg-[#F4EFE6] rounded-xl transition"
             title="Restart Challenge"
           >
             <RotateCcw className="w-4 h-4" />
@@ -135,42 +135,42 @@ export const PoseChallengeGame: React.FC<PoseChallengeGameProps> = ({
       </div>
 
       {/* Target Pose Card */}
-      <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50 to-amber-100 border-2 border-amber-300 space-y-3">
+      <div className="p-4 rounded-2xl bg-[#FAF6EE] border border-[#E6DED3] shadow-product space-y-3">
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-2xl bg-white border border-amber-200 shadow-xs flex items-center justify-center text-3xl shrink-0 animate-bounce">
+          <div className="w-14 h-14 rounded-2xl bg-white border border-[#E6DED3] shadow-xs flex items-center justify-center text-3xl shrink-0 animate-bounce">
             {activePose.icon}
           </div>
 
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-200 text-amber-900">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FDF0EB] text-[#E76F51] border border-[#F7CEC3]">
                 Challenge #{currentPoseIndex + 1}
               </span>
-              <span className="text-xs font-extrabold text-amber-700">+{activePose.points} Points</span>
+              <span className="text-xs font-black text-[#E76F51]">+{activePose.points} Points</span>
             </div>
-            <h4 className="text-lg font-black text-slate-800 pt-0.5">{activePose.title}</h4>
+            <h4 className="text-lg font-black text-[#23201D] pt-0.5 font-display">{activePose.title}</h4>
           </div>
         </div>
 
-        <p className="text-xs text-slate-700 font-bold leading-relaxed bg-white/70 p-2.5 rounded-xl border border-amber-200">
+        <p className="text-xs text-[#6C655E] font-medium leading-relaxed bg-white p-2.5 rounded-xl border border-[#E6DED3]">
           {activePose.instruction}
         </p>
 
         {/* Hold Progress Bar */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs font-black">
-            <span className={isHolding ? 'text-emerald-700 font-extrabold' : 'text-slate-500'}>
+            <span className={isHolding ? 'text-[#2D8A56] font-extrabold' : 'text-[#988F85]'}>
               {isHolding ? '🔥 Great! Keep holding the pose!' : 'Waiting for matching pose...'}
             </span>
-            <span className="text-amber-800">{Math.round(holdProgress)}%</span>
+            <span className="text-[#23201D]">{Math.round(holdProgress)}%</span>
           </div>
 
-          <div className="h-3.5 bg-white/80 rounded-full overflow-hidden border border-amber-200 p-0.5 shadow-inner">
+          <div className="h-3.5 bg-white rounded-full overflow-hidden border border-[#E6DED3] p-0.5 shadow-inner">
             <div
               className={`h-full rounded-full transition-all duration-100 ${
                 isHolding
-                  ? 'bg-gradient-to-r from-amber-400 via-orange-400 to-emerald-500 animate-pulse'
-                  : 'bg-slate-300'
+                  ? 'bg-[#2D8A56]'
+                  : 'bg-[#E6DED3]'
               }`}
               style={{ width: `${holdProgress}%` }}
             />

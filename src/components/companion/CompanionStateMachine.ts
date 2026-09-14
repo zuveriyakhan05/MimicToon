@@ -169,8 +169,8 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.CELEBRATING,
         'wave',
-        `Hello there! 👋 *${this.character.name.split(' ')[0]} waves back excitedly!*`,
-        2.8,
+        `Hello there! 👋`,
+        2.5,
         nowMs
       );
     }
@@ -179,7 +179,7 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.EXCITED,
         'jump',
-        `Boing boing boing! 🦘 Look how high you can jump!`,
+        `Boing boing! 🦘 High jump!`,
         2.5,
         nowMs
       );
@@ -189,23 +189,23 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.CELEBRATING,
         'thumbs_up',
-        `Super job, best buddy! 👍 You're doing amazing!`,
-        2.8,
+        `Super job, buddy! 👍`,
+        2.5,
         nowMs
       );
     } else if (hasVictory && this.canTriggerReaction('victory', nowMs)) {
       this.triggerReaction(
         CompanionState.CELEBRATING,
         'cheer',
-        `Peace and victory! ✌️ Woohoo!`,
-        2.6,
+        `Peace & victory! ✌️`,
+        2.5,
         nowMs
       );
     } else if (hasHighFive && this.canTriggerReaction('high_five', nowMs)) {
       this.triggerReaction(
         CompanionState.CELEBRATING,
         'high_five',
-        `High five, superhero! 🖐️ *SLAP!*`,
+        `High five, superstar! 🖐️`,
         2.4,
         nowMs
       );
@@ -215,8 +215,8 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.EXCITED,
         'laugh',
-        `Seeing your big smile makes my heart happy! 😊 Hehehe!`,
-        2.6,
+        `Love your big smile! 😊`,
+        2.5,
         nowMs
       );
     }
@@ -225,8 +225,8 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.SURPRISED,
         'surprised',
-        `Whoaaa! 😲 What did you see?! That's astonishing!`,
-        2.6,
+        `Whoaaa! 😲 So cool!`,
+        2.5,
         nowMs
       );
     }
@@ -235,8 +235,8 @@ export class CompanionStateMachine {
       this.triggerReaction(
         CompanionState.EXCITED,
         'cheer',
-        `Hands in the air! Party time with ${this.character.name.split(' ')[0]}! 🙌`,
-        2.6,
+        `Hands up! Party time! 🙌`,
+        2.5,
         nowMs
       );
     }

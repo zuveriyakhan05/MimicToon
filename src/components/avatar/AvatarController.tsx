@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
+import { Sliders, Palette, Play, Eye, EyeOff } from 'lucide-react';
 import { Avatar } from './Avatar';
-import { AvatarLoader } from './AvatarLoader';
 import { AvatarEnvironment } from './AvatarEnvironment';
-import { CharacterProfile, AvatarKinematics, BodyMotion } from '../../types';
-import { StageTheme, TestMotionPreset, FaceSignals, AvatarFacePose, HandSignals, AvatarHandPose } from '../../types/avatar';
-import { CompanionState, CompanionReactionType } from '../../types/companion';
+import { AvatarLoader } from './AvatarLoader';
+import { CharacterProfile, BodyMotion, AvatarKinematics } from '../../types';
 import {
-  Sparkles,
-  Layers,
-  Palette,
-  Eye,
-  Sliders,
-  Play,
-  RotateCcw,
-  Smile,
-  Hand,
-} from 'lucide-react';
+  StageTheme,
+  FaceSignals,
+  AvatarFacePose,
+  HandSignals,
+  AvatarHandPose,
+  TestMotionPreset,
+} from '../../types/avatar';
+import { CompanionState, CompanionReactionType } from '../../types/companion';
 
 interface AvatarControllerProps {
   character: CharacterProfile;
@@ -45,12 +42,12 @@ interface AvatarControllerProps {
 
 export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
   character,
-  kinematics = null,
-  motion = null,
-  faceSignals = null,
-  facePose = null,
-  handSignals = null,
-  handPose = null,
+  kinematics,
+  motion,
+  faceSignals,
+  facePose,
+  handSignals,
+  handPose,
   mouthOpenLevel = 0,
   themeEnvironment = 'playground',
   smoothingFactor = 0.25,
@@ -61,9 +58,9 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
   onThemeChange,
   onUpdateSettings,
   allowTestPresets = true,
-  companionState = CompanionState.IDLE,
-  companionReaction = 'none',
-  companionBlend = 1.0,
+  companionState,
+  companionReaction,
+  companionBlend,
   companionMessage = '',
 }) => {
   const [modelObject, setModelObject] = useState<THREE.Object3D | null>(null);
@@ -73,6 +70,44 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
   const [showControls, setShowControls] = useState(false);
   const [localSensitivity, setLocalSensitivity] = useState(movementSensitivity);
   const [localSmoothing, setLocalSmoothing] = useState(smoothingFactor);
+
+  // Clean companion message: remove asterisk actions like *waves back excitedly!*
+  const cleanCompanionMessage = useMemo(() => {
+    if (!companionMessage) return '';
+    return companionMessage.replace(/\*[^*]+\*/g, '').trim();
+  }, [companionMessage]);
+
+  // Determine single, prioritized active gesture/reaction for clean child feedback (no overlap)
+  const activeActionBadge = useMemo(() => {
+    if (mouthOpenLevel > 0.2) {
+      return { icon: '🗣️', label: 'Talking!', bg: 'bg-[#E76F51]', text: 'text-white' };
+    }
+    if (kinematics?.isWavingRight || kinematics?.isWavingLeft || testPreset === 'wave') {
+      return { icon: '👋', label: 'Waving!', bg: 'bg-[#3B82F6]', text: 'text-white' };
+    }
+    if (kinematics?.isHandsUp || testPreset === 'hands_up') {
+      return { icon: '🙌', label: 'Hands Up!', bg: 'bg-[#2D8A56]', text: 'text-white' };
+    }
+    if (kinematics?.isCrouching || testPreset === 'squat') {
+      return { icon: '🦘', label: 'Hop!', bg: 'bg-[#F2C66D]', text: 'text-[#23201D]' };
+    }
+    if (testPreset === 'dance') {
+      return { icon: '💃', label: 'Dance Party!', bg: 'bg-[#E76F51]', text: 'text-white' };
+    }
+    if (handSignals?.rightHand && handSignals.rightHand.gesture !== 'none') {
+      const g = handSignals.rightHand.gesture;
+      const label = g === 'thumbs_up' ? 'Thumbs Up!' : g === 'victory' ? 'Peace!' : g === 'open_palm' ? 'High Five!' : g === 'pointing' ? 'Pointing!' : 'Super Fist!';
+      const icon = g === 'thumbs_up' ? '👍' : g === 'victory' ? '✌️' : g === 'open_palm' ? '🖐️' : g === 'pointing' ? '👉' : '✊';
+      return { icon, label, bg: 'bg-[#EBF7F0]', text: 'text-[#2D8A56]' };
+    }
+    if (facePose?.isDetected && facePose.dominantExpression !== 'neutral') {
+      const exp = facePose.dominantExpression;
+      const label = exp === 'happy' ? 'Happy Smile!' : exp === 'surprised' ? 'Surprised!' : exp === 'blink' ? 'Wink!' : 'Fun Face!';
+      const icon = exp === 'happy' ? '😄' : exp === 'surprised' ? '😲' : exp === 'blink' ? '😉' : '😜';
+      return { icon, label, bg: 'bg-[#FEF7E8]', text: 'text-[#916212]' };
+    }
+    return null;
+  }, [mouthOpenLevel, kinematics, testPreset, handSignals, facePose]);
 
   // Sync external theme changes
   const activeTheme = onThemeChange ? themeEnvironment : currentTheme;
@@ -94,7 +129,7 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
 
   return (
     <div
-      className={`relative w-full h-full min-h-[380px] sm:min-h-[480px] rounded-3xl overflow-hidden border-4 border-amber-300 shadow-xl flex flex-col transition-colors duration-500 ${
+      className={`relative w-full h-full min-h-[380px] sm:min-h-[440px] rounded-3xl overflow-hidden shadow-product flex flex-col transition-colors duration-500 ${
         backgroundClasses[activeTheme]
       }`}
     >
@@ -109,35 +144,39 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
         onError={(err) => console.warn('AvatarLoader error:', err)}
       />
 
-      {/* 2. Top Status / Character Pill */}
-      <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-amber-200 shadow-sm text-xs font-black text-slate-700">
-        <span
-          className={`w-2.5 h-2.5 rounded-full ${
-            motion?.isDetected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-400'
-          }`}
-        />
-        <span>{motion?.isDetected ? 'Live Tracking 3D' : 'Idle 3D'}</span>
-        <span className="text-slate-300">|</span>
-        <span className="text-amber-700">
-          {isCustomModel ? 'Custom GLTF' : character.name}
-        </span>
-        {testPreset !== 'none' && (
-          <span className="bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full text-[10px] font-black">
-            Test: {testPreset}
+      {/* 2. Top Bar Header */}
+      <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
+        {/* Status Pill */}
+        <div className="pointer-events-auto flex items-center gap-1.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-[#E6DED3] shadow-xs text-xs font-black text-[#23201D]">
+          <span
+            className={`w-2 h-2 rounded-full ${
+              motion?.isDetected ? 'bg-[#2D8A56] animate-pulse' : 'bg-amber-400'
+            }`}
+          />
+          <span>{motion?.isDetected ? 'Live' : 'Ready'}</span>
+          <span className="text-[#E6DED3]">|</span>
+          <span className="text-[#E76F51]">
+            {isCustomModel ? 'Custom' : character.name}
           </span>
-        )}
-      </div>
+          {testPreset !== 'none' && (
+            <span className="bg-[#FEF7E8] text-amber-900 border border-[#FBE2A8] px-2 py-0.2 rounded-full text-[10px] font-black">
+              {testPreset}
+            </span>
+          )}
+        </div>
 
-      {/* 3. Stage & Theme Controls Toggle */}
-      <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5">
-        <button
-          onClick={() => setShowControls((prev) => !prev)}
-          className="bg-white/90 backdrop-blur-md hover:bg-white text-slate-700 p-2 rounded-2xl border border-amber-200 shadow-sm text-xs font-black transition-all flex items-center gap-1"
-          title="Theme & Test Presets"
-        >
-          <Sliders className="w-4 h-4 text-amber-600" />
-          <span className="hidden sm:inline">Settings</span>
-        </button>
+        {/* Settings Toggle (Only shown when allowTestPresets is enabled) */}
+        {allowTestPresets && (
+          <div className="pointer-events-auto">
+            <button
+              onClick={() => setShowControls((prev) => !prev)}
+              className="bg-white/90 backdrop-blur-md hover:bg-white text-[#6C655E] hover:text-[#23201D] p-1.5 rounded-full border border-[#E6DED3] shadow-xs text-xs font-black transition-all flex items-center justify-center cursor-pointer"
+              title="3D Theme Settings"
+            >
+              <Sliders className="w-3.5 h-3.5 text-[#E76F51]" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Expandable Theme & Test Presets Drawer */}
@@ -261,7 +300,7 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
         <Canvas
           shadows
           dpr={[1, Math.min(1.5, typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1)]}
-          camera={{ position: [0, 0.9, 4.2], fov: 45 }}
+          camera={{ position: [0, 0.65, 4.3], fov: 42 }}
           gl={{
             antialias: true,
             alpha: true,
@@ -298,109 +337,26 @@ export const AvatarController: React.FC<AvatarControllerProps> = React.memo(({
           />
         </Canvas>
 
-        {/* Dynamic Cartoon Companion Speech Bubble */}
-        {companionMessage && (
-          <div className="absolute top-14 left-1/2 -translate-x-1/2 z-20 max-w-sm w-11/12 sm:w-auto px-5 py-2.5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-3 border-amber-300 text-amber-950 text-sm font-black text-center animate-bounce-subtle pointer-events-none flex items-center justify-center gap-2">
-            <span className="text-xl">
+        {/* Dynamic Cartoon Companion Speech Bubble (Clear of head & ears) */}
+        {cleanCompanionMessage && (
+          <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20 max-w-xs px-4 py-2 bg-white/95 backdrop-blur-md rounded-2xl shadow-product border-2 border-[#E76F51] text-[#23201D] text-xs sm:text-sm font-black text-center pointer-events-none flex items-center justify-center gap-2 animate-bounce-subtle">
+            <span className="text-base shrink-0">
               {companionReaction === 'waving' ? '👋' : companionReaction === 'jumping' ? '🦘' : companionReaction === 'cheering' ? '🎉' : '💬'}
             </span>
-            <span>{companionMessage}</span>
+            <span className="leading-snug">{cleanCompanionMessage}</span>
           </div>
         )}
       </div>
 
-      {/* 5. Real-Time Gesture & Facial Action Badges */}
-      <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Hand Gestures (Right or Left) */}
-          {handSignals?.rightHand && handSignals.rightHand.gesture !== 'none' && (
-            <span className="bg-emerald-400 text-emerald-950 px-3 py-1 rounded-full text-xs font-black shadow-md flex items-center gap-1.5 animate-in fade-in">
-              <Hand className="w-3.5 h-3.5" />
-              <span>
-                {handSignals.rightHand.gesture === 'thumbs_up'
-                  ? '👍 Thumbs Up!'
-                  : handSignals.rightHand.gesture === 'victory'
-                  ? '✌️ Peace Sign!'
-                  : handSignals.rightHand.gesture === 'open_palm'
-                  ? '🖐️ High Five!'
-                  : handSignals.rightHand.gesture === 'pointing'
-                  ? '👉 Pointing!'
-                  : handSignals.rightHand.gesture === 'fist'
-                  ? '✊ Super Fist!'
-                  : 'Hand Gesture'}
-              </span>
-            </span>
-          )}
-          {handSignals?.leftHand && handSignals.leftHand.gesture !== 'none' && (
-            <span className="bg-teal-400 text-teal-950 px-3 py-1 rounded-full text-xs font-black shadow-md flex items-center gap-1.5 animate-in fade-in">
-              <Hand className="w-3.5 h-3.5" />
-              <span>
-                {handSignals.leftHand.gesture === 'thumbs_up'
-                  ? '👍 Left Thumbs Up!'
-                  : handSignals.leftHand.gesture === 'victory'
-                  ? '✌️ Left Peace Sign!'
-                  : handSignals.leftHand.gesture === 'open_palm'
-                  ? '🖐️ Left High Five!'
-                  : handSignals.leftHand.gesture === 'pointing'
-                  ? '👈 Left Pointing!'
-                  : handSignals.leftHand.gesture === 'fist'
-                  ? '✊ Left Fist!'
-                  : 'Left Hand Gesture'}
-              </span>
-            </span>
-          )}
-
-          {facePose?.isDetected && facePose.dominantExpression !== 'neutral' && (
-            <span className="bg-amber-400 text-amber-950 px-3 py-1 rounded-full text-xs font-black shadow-md flex items-center gap-1.5 animate-in fade-in">
-              <Smile className="w-3.5 h-3.5" />
-              <span>
-                {facePose.dominantExpression === 'happy'
-                  ? 'Happy Smile 😄'
-                  : facePose.dominantExpression === 'surprised'
-                  ? 'Surprised 😲'
-                  : facePose.dominantExpression === 'angry'
-                  ? 'Feisty 😠'
-                  : facePose.dominantExpression === 'sad'
-                  ? 'Pouting 😢'
-                  : facePose.dominantExpression === 'blink'
-                  ? 'Wink 😉'
-                  : 'Facial React'}
-              </span>
-            </span>
-          )}
-          {(kinematics?.isHandsUp || testPreset === 'hands_up') && (
-            <span className="bg-amber-400 text-amber-950 px-3 py-1 rounded-full text-xs font-black shadow-md animate-bounce">
-              🙌 Hands Up!
-            </span>
-          )}
-          {(kinematics?.isWavingRight || testPreset === 'wave') && (
-            <span className="bg-blue-400 text-white px-3 py-1 rounded-full text-xs font-black shadow-md animate-pulse">
-              👋 Waving!
-            </span>
-          )}
-          {kinematics?.isWavingLeft && testPreset !== 'wave' && (
-            <span className="bg-rose-400 text-white px-3 py-1 rounded-full text-xs font-black shadow-md animate-pulse">
-              👋 Left Wave!
-            </span>
-          )}
-          {(kinematics?.isCrouching || testPreset === 'squat') && (
-            <span className="bg-purple-400 text-white px-3 py-1 rounded-full text-xs font-black shadow-md">
-              🐰 Bunny Squat!
-            </span>
-          )}
-          {testPreset === 'dance' && (
-            <span className="bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-black shadow-md animate-bounce">
-              💃 Dance Party!
-            </span>
-          )}
-        </div>
-
-        {mouthOpenLevel > 0.15 && (
-          <span className="bg-rose-500 text-white px-3 py-1 rounded-full text-xs font-black shadow-md animate-pulse">
-            🗣️ Speaking!
+      {/* 5. Single Prioritized Fun Action Badge (Zero Overlap) */}
+      {activeActionBadge && (
+        <div className="absolute bottom-3 left-3 z-20 pointer-events-none">
+          <span className={`${activeActionBadge.bg} ${activeActionBadge.text} px-3.5 py-1.5 rounded-full text-xs font-black shadow-product flex items-center gap-1.5 animate-bounce-subtle border border-black/10`}>
+            <span className="text-sm">{activeActionBadge.icon}</span>
+            <span>{activeActionBadge.label}</span>
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 });

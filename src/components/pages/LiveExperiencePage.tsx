@@ -405,51 +405,51 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onNavigate('landing')}
-            className="p-3 rounded-2xl bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 transition shadow-sm flex items-center gap-2 text-xs font-black"
+            className="p-2.5 rounded-lg bg-white border border-[#E6DED3] text-[#23201D] hover:bg-[#F8F4EC] transition shadow-2xs flex items-center gap-2 text-xs font-black cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Home</span>
           </motion.button>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-2xl sm:text-3xl font-black text-[#23201D] tracking-tight flex items-center gap-2">
               <span>Live Cartoon Mirror</span>
               <span className="text-xl">🪞</span>
             </h1>
-            <p className="text-xs font-bold text-slate-500">
+            <p className="text-xs sm:text-sm font-medium text-[#6C655E]">
               Move your arms, tilt your head, and talk — {activeCharacter.name} mimics you in real time!
             </p>
           </div>
         </div>
 
         {/* Quick Mode Jumpers & Fullscreen */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onNavigate('copyme')}
-            className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-white font-black text-xs sm:text-sm shadow-md flex items-center gap-1.5 transition"
+            className="px-4 py-2 rounded-lg bg-[#E76F51] hover:bg-[#D85D3F] text-white font-black text-xs sm:text-sm shadow-tactile-coral flex items-center gap-1.5 transition cursor-pointer"
           >
             <Gamepad2 className="w-4 h-4" />
             <span>Copy Me Game! 🎮</span>
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => onNavigate('characters')}
-            className="px-3.5 py-2.5 rounded-2xl bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 font-black text-xs flex items-center gap-1.5 shadow-sm transition"
+            className="px-3.5 py-2 rounded-lg bg-white border border-[#E6DED3] hover:bg-[#F8F4EC] text-[#23201D] font-extrabold text-xs flex items-center gap-1.5 shadow-2xs transition cursor-pointer"
           >
-            <Smile className="w-4 h-4 text-amber-600" />
+            <Smile className="w-4 h-4 text-[#E76F51]" />
             <span className="hidden sm:inline">Change Buddy</span>
           </motion.button>
 
           <button
             onClick={toggleFullscreen}
-            className="p-2.5 rounded-2xl bg-white border-2 border-slate-200 text-slate-600 hover:bg-slate-50 transition shadow-sm"
+            className="p-2 rounded-lg bg-white border border-[#E6DED3] text-[#6C655E] hover:text-[#23201D] hover:bg-[#F8F4EC] transition shadow-2xs cursor-pointer"
             title={isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -467,14 +467,14 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
         {/* ================= COLUMN 1 (LEFT): WEBCAM / CHILD ================= */}
         <div className="md:col-span-4 lg:col-span-4 flex flex-col gap-3">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-black text-slate-800 flex items-center gap-1.5">
+            <span className="text-xs font-black text-[#23201D] flex items-center gap-1.5">
               <span>🎥 You (Child Feed)</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
             </span>
-            <span className="text-[11px] font-bold text-slate-500">Live AI Vision</span>
+            <span className="text-[11px] font-bold text-[#6C655E]">Live AI Vision</span>
           </div>
 
-          <div className="relative rounded-3xl overflow-hidden border-3 border-amber-200/90 shadow-lg bg-slate-950">
+          <div className="relative rounded-2xl overflow-hidden border-2 border-[#E6DED3] shadow-product-lg bg-[#1E1B18]">
             <WebcamTracker
               onMotionDetected={handleMotionDetected}
               onLandmarksDetected={handleLandmarksDetected}
@@ -490,10 +490,10 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
           </div>
 
           {/* Vision Telemetry Bar */}
-          <div className="p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-xs flex items-center justify-between text-xs font-bold text-slate-600">
+          <div className="p-3 rounded-xl bg-white border border-[#E6DED3] shadow-product flex items-center justify-between text-xs font-bold text-[#6C655E]">
             <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>Pose: {currentMotion ? 'Locked' : 'Searching'}</span>
+              <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+              <span className="text-[#23201D]">Pose: {currentMotion ? 'Locked' : 'Searching'}</span>
             </div>
             <span>Confidence: {Math.round((currentMotion?.confidence || 0) * 100)}%</span>
           </div>
@@ -502,16 +502,16 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
         {/* ================= COLUMN 2 (CENTER): CARTOON AVATAR ================= */}
         <div className="md:col-span-4 lg:col-span-5 flex flex-col gap-3">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-black text-slate-800 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-amber-500 fill-amber-400" />
+            <span className="text-xs font-black text-[#23201D] flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#E76F51]" />
               <span>{activeCharacter.name} (3D Articulated)</span>
             </span>
-            <span className="text-[11px] font-black text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
+            <span className="text-[11px] font-black text-[#C04F34] bg-[#FDF0EB] border border-[#F7CEC3] px-2 py-0.5 rounded-md">
               Real-time Mimic
             </span>
           </div>
 
-          <div className="w-full aspect-4/3 min-h-[380px] sm:min-h-[440px] rounded-2xl overflow-hidden border border-amber-300 shadow-lg bg-slate-900">
+          <div className="w-full aspect-4/3 min-h-[380px] sm:min-h-[440px] rounded-2xl overflow-hidden border-2 border-[#E6DED3] shadow-product-lg bg-[#1E1B18]">
             <Avatar3DStage
               character={activeCharacter}
               kinematics={kinematics}
@@ -536,7 +536,7 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
           </div>
 
           {/* Quick Character Picker Strip */}
-          <div className="bg-white p-3.5 rounded-3xl border-2 border-amber-200 shadow-sm">
+          <div className="bg-white p-3 rounded-2xl border border-[#E6DED3] shadow-product">
             <AvatarCharacterSelector
               selectedCharacter={activeCharacter}
               onSelectCharacter={onSelectCharacter}
