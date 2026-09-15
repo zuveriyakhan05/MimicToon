@@ -194,10 +194,16 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
     let stream: MediaStream | null = null;
     let animId: number;
 
+    if (!isMicActive) {
+      setAudioLevel(0);
+      return;
+    }
+
     const initAudio = async () => {
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        await audioContext.resume();
         analyser = audioContext.createAnalyser();
         analyser.fftSize = 128;
         const source = audioContext.createMediaStreamSource(stream);
@@ -230,7 +236,7 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
       if (audioContext) audioContext.close().catch(() => {});
       if (stream) stream.getTracks().forEach((t) => t.stop());
     };
-  }, []);
+  }, [isMicActive]);
 
   // Continuous Companion Update Tick Loop
   useEffect(() => {
@@ -400,7 +406,7 @@ export const LiveExperiencePage: React.FC<LiveExperiencePageProps> = ({
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-6 space-y-6">
+    <div className="max-w-360 mx-auto px-4 sm:px-8 py-6 space-y-6">
       {/* Top Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">

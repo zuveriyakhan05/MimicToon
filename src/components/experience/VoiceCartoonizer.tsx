@@ -603,7 +603,7 @@ export const VoiceCartoonizer: React.FC<VoiceCartoonizerProps> = ({
             </span>
           </div>
 
-          <div className="p-3 bg-white rounded-xl border border-slate-200 text-sm font-bold min-h-[44px] flex items-center shadow-xs">
+          <div className="p-3 bg-white rounded-xl border border-slate-200 text-sm font-bold min-h-11 flex items-center shadow-xs">
             {childTranscript ? (
               <span className="text-slate-900">
                 &ldquo;<strong className="text-rose-600">{childTranscript}</strong>&rdquo;
@@ -638,7 +638,7 @@ export const VoiceCartoonizer: React.FC<VoiceCartoonizerProps> = ({
           </div>
 
           <div
-            className={`p-3 rounded-xl border text-sm font-bold min-h-[48px] flex items-center transition-all ${
+            className={`p-3 rounded-xl border text-sm font-bold min-h-12 flex items-center transition-all ${
               characterReply
                 ? 'bg-amber-50/90 text-amber-950 border-amber-300 shadow-xs ring-1 ring-amber-200'
                 : 'bg-white text-slate-400 border-slate-200 text-xs italic font-medium'

@@ -918,7 +918,7 @@ export const Camera: React.FC<CameraProps> = React.memo(({
 
   return (
     <div
-      className={`relative w-full rounded-3xl overflow-hidden bg-slate-900 border-4 border-amber-300 shadow-xl flex flex-col items-center justify-center min-h-[320px] sm:min-h-[380px] ${className}`}
+      className={`relative w-full rounded-3xl overflow-hidden bg-slate-900 border-4 border-amber-300 shadow-xl flex flex-col items-center justify-center min-h-80 sm:min-h-95 ${className}`}
     >
       {/* Real-time HTML5 Camera Video Stream */}
       <video
@@ -944,7 +944,7 @@ export const Camera: React.FC<CameraProps> = React.memo(({
 
       {/* Simulated Mode Background Stage */}
       {isSimulated && (
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-indigo-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center">
           <div className="text-5xl mb-2 animate-bounce">🤖</div>
           <h3 className="text-white font-black text-lg">Interactive Motion Simulator</h3>
           <p className="text-xs text-indigo-200 mt-1 max-w-xs">

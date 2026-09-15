@@ -524,7 +524,7 @@ export const ExperienceDashboard: React.FC<ExperienceDashboardProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: 3D Articulated Cartoon Avatar Stage */}
         <div className="lg:col-span-7 flex flex-col gap-3">
-          <div className="w-full aspect-4/3 min-h-[380px] sm:min-h-[460px]">
+          <div className="w-full aspect-4/3 min-h-95 sm:min-h-115">
             <Avatar3DStage
               character={activeCharacter}
               kinematics={gameDemoKinematics || kinematics}

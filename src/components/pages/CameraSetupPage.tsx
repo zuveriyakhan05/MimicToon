@@ -42,6 +42,7 @@ export const CameraSetupPage: React.FC<CameraSetupPageProps> = ({
   const [isWavingSeen, setIsWavingSeen] = useState(false);
   const [micAudioLevel, setMicAudioLevel] = useState(0);
   const [micPassedTest, setMicPassedTest] = useState(false);
+  const [micSetupError, setMicSetupError] = useState<string | null>(null);
 
   // Calibration Motion State
   const [currentMotion, setCurrentMotion] = useState<BodyMotion | null>(null);
@@ -57,8 +58,12 @@ export const CameraSetupPage: React.FC<CameraSetupPageProps> = ({
 
     const startMic = async () => {
       try {
+        if (!navigator.mediaDevices?.getUserMedia) {
+          throw new Error('Microphone access is not supported by this browser.');
+        }
         stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        await audioContext.resume();
         analyser = audioContext.createAnalyser();
         analyser.fftSize = 256;
         const source = audioContext.createMediaStreamSource(stream);
@@ -80,6 +85,11 @@ export const CameraSetupPage: React.FC<CameraSetupPageProps> = ({
         checkLevel();
       } catch (err) {
         console.warn('Microphone setup fallback:', err);
+        setMicSetupError(
+          err instanceof DOMException && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')
+            ? 'Microphone permission was blocked. Allow microphone access in the browser address bar and reload this page.'
+            : 'Microphone test could not start. Check that a microphone is connected and try again.'
+        );
       }
     };
 
@@ -418,6 +428,12 @@ export const CameraSetupPage: React.FC<CameraSetupPageProps> = ({
                   {micPassedTest && <CheckCircle2 className="w-5 h-5 text-[#2D8A56]" />}
                 </div>
               </div>
+              {micSetupError && (
+                <div className="mt-2 flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 p-2 text-[11px] font-semibold text-rose-800">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" />
+                  <span>{micSetupError}</span>
+                </div>
+              )}
             </div>
 
             {/* Ready to go banner */}
